@@ -20,7 +20,7 @@ mongoose.connection.on('error', (err) => {
 });
 // Indicator we've successfully connected and a bit of positivity
 mongoose.connection.once('open', () => {
-	console.log(`DB connection success! You are amazing!`);
+	console.log(`DB connection success! You are amazing ${process.env.NAME || 'human'}!`);
 });
 
 app.use('/questions', routes);
