@@ -2,6 +2,8 @@
 
 let express = require('express');
 let router = express.Router();
+// importing our question model
+let Question = require('./models').Question;
 
 //GET /questions
 // Route for questions collection 
