@@ -2,12 +2,21 @@
 let express = require('express');
 let app = express();
 let routes = require('./routes');
-let logger = require('morgan');
 
 let jsonParser = require('body-parser').json;
+let logger = require('morgan');
 
 app.use(logger('dev'));
 app.use(jsonParser());
+
+let mongoose = require('mongoose');
+// import environmental variables from our variables.env file
+require('dotenv').config({ path: 'variables.env' });
+
+mongoose.connect(process.env.DATABASE);
+mongoose.connection.on('error', (err) => {
+	console.error(`Oh noes! ${err.message}`);
+})
 
 app.use('/questions', routes);
 
