@@ -12,11 +12,16 @@ app.use(jsonParser());
 let mongoose = require('mongoose');
 // import environmental variables from our variables.env file
 require('dotenv').config({ path: 'variables.env' });
-
+// Connect to the DB
 mongoose.connect(process.env.DATABASE);
+// Handle any errors for the DB
 mongoose.connection.on('error', (err) => {
 	console.error(`Oh noes! ${err.message}`);
-})
+});
+// Indicator we've successfully connected and a bit of positivity
+mongoose.connection.once('open', () => {
+	console.log(`DB connection success! You are amazing!`);
+});
 
 app.use('/questions', routes);
 
