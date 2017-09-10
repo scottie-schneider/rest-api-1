@@ -1,8 +1,11 @@
 'use strict';
 
-var express = require("express");
-var router = express.Router();
-var Question = require("./models").Question;
+
+let express = require('express');
+let router = express.Router();
+// importing our question model
+let Question = require('./models').Question;
+
 
 router.param("qID", function(req,res,next,id){
 	Question.findById(id, function(err, doc){
